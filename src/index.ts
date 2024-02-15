@@ -19,6 +19,11 @@ mongoose
 app.use(express.json());
 
 // Routes setup
+app.get('/', (req, res) =>
+  res.send(
+    '<h2>Hello 👋, follow the guide on <a href="https://github.com/EzeibekweEmma/VzyBackEndTest/blob/main/README.md">github</a></h2>'
+  )
+);
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/stripe', stripeWebhook);
