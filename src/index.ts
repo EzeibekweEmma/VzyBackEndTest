@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRouter from './routes/auth';
 import usersRouter from './routes/users';
+import stripeWebhook from './routes/webhook';
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 // Routes setup
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/stripe', stripeWebhook);
 
 // Start server
 const PORT = process.env.PORT || 3000;
