@@ -10,7 +10,7 @@ const stripeClient = new stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: '2023-10-16',
 });
 
-stripeWebhook.post('/payment', async (req: Request, res: Response) => {
+stripeWebhook.post('/payment', auth, async (req: Request, res: Response) => {
   const session = await stripeClient.checkout.sessions.create({
     line_items: [
       {
@@ -32,11 +32,11 @@ stripeWebhook.post('/payment', async (req: Request, res: Response) => {
   res.send({ url: session.url });
 });
 
-stripeWebhook.get('/success', (req: Request, res: Response) => {
+stripeWebhook.get('/success', auth, (req: Request, res: Response) => {
   res.json({ message: 'Payment successful' });
 });
 
-stripeWebhook.get('/cancel', (req: Request, res: Response) => {
+stripeWebhook.get('/cancel', auth, (req: Request, res: Response) => {
   res.json({ message: 'Payment cancelled' });
 });
 
